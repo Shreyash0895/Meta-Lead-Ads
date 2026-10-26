@@ -11,8 +11,7 @@ import {
 import io from 'socket.io-client';
 
 // Replace with your backend URL (e.g. Ngrok HTTPS URL or local IP)
-const BACKEND_URL = 'https://your-actual-ngrok-subdomain.ngrok-free.app';
-
+const BACKEND_URL = 'https://xxxx.ngrok-free.app';
 export default function App() {
   const [leads, setLeads] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
