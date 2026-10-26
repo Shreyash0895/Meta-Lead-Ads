@@ -24,6 +24,8 @@ app.get('/webhook', (req, res) => {
   const token = req.query['hub.verify_token'];
   const challenge = req.query['hub.challenge'];
 
+  console.log(`[Meta Webhook] Received verify token: "${token}" | Expected: "${VERIFY_TOKEN}"`);
+
   if (mode === 'subscribe' && token === VERIFY_TOKEN) {
     console.log('[Meta Webhook] Verification successful!');
     return res.status(200).send(challenge);
@@ -53,12 +55,11 @@ app.post('/webhook', (req, res) => {
       status: 'Received via Meta Webhook'
     };
 
-    // Broadcast lead to all connected React Native clients
+    // Broadcast lead to connected React Native clients
     io.emit('new_lead', leadData);
     console.log('[Socket.io] Emitted new_lead event:', leadData);
   }
 
-  // Meta expects 200 OK immediately
   res.status(200).send('EVENT_RECEIVED');
 });
 
